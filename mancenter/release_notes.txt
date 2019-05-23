@@ -1,0 +1,77 @@
+
+This document lists the new features, enhancements, fixed issues and, removed or deprecated features (if any) for Hazelcast Management Center 3.11.x releases. 
+The numbers in the square brackets refer to the issue number in Hazelcast Management Center’s GitHub repository.
+
+==== Hazelcast Management Center 3.11.3 ====
+
+1. Enhancements
+
+- Added a warning to inform when the scripting is disabled on the cluster.
+- Improved the pagination representations to provide information on page counts. [#1177]
+- Improved the initial Management Center loading time by caching its assets (scripts and themes). [#343]
+
+2. Fixes
+
+- Fixed an issue where the status screen was becoming unresponsive after some time. [#1393]
+- Fixed the "Maps" view so that the "Map Browser" and "Map Config" buttons are not contained in a chart. [#1144]
+- Fixed the appearance of "Current Cluster State" representation which previously looked like a button. [#1128]
+
+==== Hazelcast Management Center 3.11.2 ====
+
+1. Fixes
+
+- Fixed an issue where the status screen was becoming unresponsive after some time. [#1393]
+
+==== Hazelcast Management Center 3.11.1 ====
+
+1. Fixes
+
+- Detail screens for data structures was not working on Internet Explorer and Edge. This is fixed by adding the related compatibilities. [#1301]
+- Fixed an issue where some of the graphs were showing multiple lines. [#1273]
+- Fixed an issue where the monitoring screen for maps were becoming unresponsive after some time. [#1252]
+- Fixed an issue where the graph states were not refreshing when switching between the clusters, i.e., state from the previous cluster was shown. It was also occurring when switching between the instances of same data structures within one cluster. [#1250]
+- Fixed an issue where the "Rolling Upgrade" and "Hot Restart" pages of the "Administration" menu was not shown according to the licenses in hand. [#1248]
+- Fixed the overlapping of memory and CPU utilization parts of the "Status" screen. [#1232]
+- Fixed various cosmetic issues related to distributed object graphs and statistics. [#1217]
+- Fixed the incorrect representation of the "Value" column in a specific PN Counter page. It was showing the difference between the number of add operations and subtract operations instead of the current value of the counter on the related member. [#1203]
+- Fixed the incorrect screen message when Management Center is started with Hazelcast Enterprise license and no cluster is selected, e.g., after login. In this case, the "Rolling Upgrade" and "Hot Restart" pages of the "Administration" menu was showing the message "You don’t have a license to access this URL". [#1195]
+- Fixed an issue where the graphs for map and cache structures was showing data from previous statistics. [#1145]
+
+==== Hazelcast Management Center 3.11 ====
+
+1. New Features
+
+- Introduced "License" screen which shows the details of your Hazelcast Management Center and cluster licenses. See the License Information chapter in Hazelcast Management Center Reference Manual for more information.
+-  Introduced Delta WAN Synchronization which uses Merkle trees. See WAN Sync section for more information.
+
+2. Enhancements
+
+- Content of the thread dumps on the Members screen can now be copied to clipboard. [#1125]
+- Hot Restart screen now shows the directory which is configured for Hot Restart backup. [#1035]
+- Upgraded to the latest Jetty version to eliminate the security vulnerabilities. [#989]
+- Improved WAN synchronization screen so that now it shows a stream of events that happen on each member. [#477]
+- Improved WAN replication monitoring screen by making the WAN replication status and operations for each member more obvious. [#316]
+- WAN replication could only be stopped on a per-member basis. The option to stop it on the `wan-replication` level has been added so that all members can stop replicating. [#314]
+
+3. Fixes
+
+- Fixed the Management Center user interface for Internet Explorer 11 on Windows 10. It was showing only the logout button. [#1207] 
+- Fixed an issue where long string values of a map were not wrapped in the Map Browser screen. [#1172]
+- Fixed incorrect units shown in some of the statistics graphs. [#1146]
+- Fixed uptime information shown for clients which was "0" even the clients were running. [#1120]
+- Fixed WAN synchronization error message which read as "undefined". [#1105]
+- Fixed an issue where expanding the WAR file was causing Management Center to crash. [#1028]
+- Fixed an issue where changing to Hot Restart tab was not updating the browser tab title. [#1005]
+- Fixed an issue where the names for some maps were not visible on the Map Memory Distribution screen. [#853]
+- Hot Restart Backup operation was not showing any progress. This is fixed by migrating the frontend component to React. [#758]
+
+4. Behavioral Changes
+
+- Since the system property `hazelcast.mc.max.visible.instance.count` is removed with the release of Hazelcast
+IMDG 3.11, you may see more than usual data in your Management Center, if you configured the system property and have
+more than the specified amount of data structures in your Hazelcast cluster. You can disable statistics for individual
+data structures in your Hazelcast IMDG configuration to control the amount of data in your Management Center.
+
+- When TLS is enabled in standalone mode (via command line argument `-Dhazelcast.mc.tls.enabled=true`), HTTP port will
+be disabled by default. If you want to preserve the old behavior and keep HTTP port open and redirect to HTTPS port, use
+`-Dhazelcast.mc.tls.enableHttpPort=true` command line argument.
