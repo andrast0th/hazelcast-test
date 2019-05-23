@@ -1,5 +1,4 @@
 # hazelcast-test
-Test Hazelcast
 
 Start the mancenter by running: start.bat 8080 hazelcast-mancenter
 
